@@ -20,4 +20,5 @@ public class TestScientificCalculator extends MainActions {
         clearFieldInput(scientificCalculatorPage, actions);
         complexExpressionShouldBeCorrect(scientificCalculatorPage, actions);
     }
+
 }
