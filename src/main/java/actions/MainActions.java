@@ -31,7 +31,7 @@ public class MainActions extends ActionsBase {
         String fieldInput = scientificCalculatorPage.fieldInput.getText().trim();
         int countSymbols = fieldInput.replace(" ", "").length();
         for (int i = 0; i < countSymbols; i++) {
-            actions.sendKeys(Keys.BACK_SPACE).build().perform();
+            actions.sendKeys(Keys.BACK_SPACE).perform();
         }
     }
 
@@ -51,24 +51,30 @@ public class MainActions extends ActionsBase {
 
     public void complexExpressionShouldBeCorrect(ScientificCalculatorPage scientificCalculatorPage, Actions actions) {
         scientificCalculatorPage.buttonLog.click();
-        actions.sendKeys(Keys.NUMPAD5).build().perform();
-        actions.sendKeys(Keys.NUMPAD6).build().perform();
-        actions.sendKeys(")").build().perform();
-        actions.sendKeys("/").build().perform();
+        actions.sendKeys(Keys.NUMPAD5).perform();
+        actions.sendKeys(Keys.NUMPAD6).perform();
+        actions.keyDown(Keys.SHIFT)
+                .sendKeys(")")
+                .keyUp(Keys.SHIFT)
+                .perform();
+        actions.sendKeys("/").perform();
         scientificCalculatorPage.buttonLn.click();
-        actions.sendKeys(Keys.NUMPAD5).build().perform();
-        actions.sendKeys(Keys.NUMPAD6).build().perform();
-        actions.sendKeys(")").build().perform();
-        actions.sendKeys(Keys.MULTIPLY).build().perform();
-        actions.sendKeys("(").build().perform();
-        actions.sendKeys(Keys.NUMPAD4).build().perform();
+        actions.sendKeys(Keys.NUMPAD5).perform();
+        actions.sendKeys(Keys.NUMPAD6).perform();
+        pressRightParenthesisButton(actions);
+        actions.sendKeys(Keys.MULTIPLY).perform();
+        actions.keyDown(Keys.SHIFT)
+                .sendKeys("(")
+                .keyUp(Keys.SHIFT)
+                .perform();
+        actions.sendKeys(Keys.NUMPAD4).perform();
         scientificCalculatorPage.buttonRadical.click();
-        actions.sendKeys(Keys.NUMPAD5).build().perform();
-        actions.sendKeys(Keys.MULTIPLY).build().perform();
-        actions.sendKeys(Keys.NUMPAD1).build().perform();
-        actions.sendKeys(Keys.NUMPAD0).build().perform();
-        actions.sendKeys(")").build().perform();
-        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.sendKeys(Keys.NUMPAD5).perform();
+        actions.sendKeys(Keys.MULTIPLY).perform();
+        actions.sendKeys(Keys.NUMPAD1).perform();
+        actions.sendKeys(Keys.NUMPAD0).perform();
+        pressRightParenthesisButton(actions);
+        actions.sendKeys(Keys.ENTER).perform();
 
         BigDecimal expectedResult = BigDecimal.valueOf(Math.log10(56) / Math.log(56) * (Math.pow(4, 1.0 / 5.0) * 10));
         BigDecimal expectedResultRoundUp = expectedResult.setScale(10, RoundingMode.UP);
